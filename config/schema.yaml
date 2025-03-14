@@ -39,6 +39,8 @@ drop_columns:
 num_features:
   - ApplicantIncome
   - LoanAmount
+  
+num_feature2:
   - Credit_History
 
 oh_columns:
