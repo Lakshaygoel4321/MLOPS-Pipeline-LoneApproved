@@ -1,0 +1,51 @@
+columns:
+  - Loan_ID: category
+  - Gender: category
+  - Married: category
+  - Dependents: category
+  - Education: category
+  - Self_Employed: category
+  - ApplicantIncome: int
+  - CoapplicantIncome: float
+  - LoanAmount: float
+  - Loan_Amount_Term: float
+  - Credit_History: float
+  - Property_Area: category
+  - Loan_Status: category
+
+numerical_columns:
+  - ApplicantIncome
+  - CoapplicantIncome
+  - LoanAmount
+  - Loan_Amount_Term
+  - Credit_History
+
+categorical_columns:
+  - Loan_ID
+  - Gender
+  - Married
+  - Dependents
+  - Education
+  - Self_Employed
+  - Property_Area
+  - Loan_Status
+
+drop_columns:
+  - CoapplicantIncome
+  - Loan_ID
+  - Loan_Amount_Term
+
+
+num_features:
+  - ApplicantIncome
+  - LoanAmount
+  - Credit_History
+
+oh_columns:
+  - Gender
+  - Married
+  - Dependents
+  - Education
+  - Self_Employed
+  - Property_Area
+
