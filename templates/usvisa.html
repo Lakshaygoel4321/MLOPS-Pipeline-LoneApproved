@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approved Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Loan Approval Prediction</a>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        <div class="card shadow p-4">
+            <h2 class="text-center">Loan Approval Form</h2>
+            <form action="/" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Gender" class="form-label">Gender</label>
+                        <select class="form-select" id="Gender" name="Gender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Married" class="form-label">Married</label>
+                        <select class="form-select" id="Married" name="Married" required>
+                            <option value="" disabled selected>Select Status</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="Dependents" class="form-label">Dependents</label>
+                    <select class="form-select" id="Dependents" name="Dependents" required>
+                        <option value="" disabled selected>Select Status</option>
+                        <option>1</option>
+                        <option>0</option>
+                        <option>2</option>
+                        <option>3+</option>
+                    </select>
+                </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Education" class="form-label">Education</label>
+                        <select class="form-select" id="Education" name="Education" required>
+                            <option value="" disabled selected>Select Education Level</option>
+                            <option>Graduate</option>
+                            <option>Not Graduate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Self_Employed" class="form-label">Self Employed</label>
+                        <select class="form-select" id="Self_Employed" name="Self_Employed" required>
+                            <option value="" disabled selected>Select Option</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="ApplicantIncome" class="form-label">Applicant Income</label>
+                        <input type="number" class="form-control" id="ApplicantIncome" name="ApplicantIncome" min="0" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="LoanAmount" class="form-label">Loan Amount</label>
+                        <input type="number" class="form-control" id="LoanAmount" name="LoanAmount" min="0" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Credit_History" class="form-label">Credit History</label>
+                        <select class="form-select" id="Credit_History" name="Credit_History" required>
+                            <option value="" disabled selected>Select Credit History</option>
+                            <option>1</option>
+                            <option>0</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="Property_Area" class="form-label">Property Area</label>
+                    <select class="form-select" id="Property_Area" name="Property_Area" required>
+                        <option value="" disabled selected>Select Property Area</option>
+                        <option>Urban</option>
+                        <option>Rural</option>
+                        <option>Semiurban</option>
+                    </select>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-5">Check Approved Loan Status</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="container mt-4 text-center">
+        <div class="alert {{ 'alert-success' if context == 'Loan is Approved' else 'alert-danger' }}" role="alert">
+            <h4 class="fw-bold">Status: {{ context }}</h4>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

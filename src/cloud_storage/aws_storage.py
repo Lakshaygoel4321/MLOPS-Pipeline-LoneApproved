@@ -30,28 +30,24 @@ class SimpleStorageService:
             raise USvisaException(e,sys)
         
         
-
     @staticmethod
-    def read_object(object_name: str, decode: bool = True, make_readable: bool = False) -> Union[StringIO, str]:
-        """
-        Method Name :   read_object
-        Description :   This method reads the object_name object with kwargs
-
-        Output      :   The column name is renamed
-        On Failure  :   Write an exception log and then raise an exception
-
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
-        """
+    def read_object(object_name: object, decode: bool = True, make_readable: bool = False) -> Union[StringIO, str]:
         logging.info("Entered the read_object method of S3Operations class")
 
         try:
+            if isinstance(object_name, list):
+                raise TypeError("Expected a single S3 object, but received a list.")
+
+            if not hasattr(object_name, "get"):
+                raise TypeError(f"Expected an S3 object, but got {type(object_name)} instead.")
+
             func = (
                 lambda: object_name.get()["Body"].read().decode()
                 if decode is True
                 else object_name.get()["Body"].read()
             )
-            conv_func = lambda: StringIO(func()) if make_readable is True else func()
+
+            conv_func = lambda: StringIO(func()) if make_readable else func()
             logging.info("Exited the read_object method of S3Operations class")
             return conv_func()
 
@@ -78,30 +74,21 @@ class SimpleStorageService:
         except Exception as e:
             raise USvisaException(e, sys) from e
 
-    def get_file_object( self, filename: str, bucket_name: str) -> Union[List[object], object]:
-        """
-        Method Name :   get_file_object
-        Description :   This method gets the file object from bucket_name bucket based on filename
-
-        Output      :   list of objects or object is returned based on filename
-        On Failure  :   Write an exception log and then raise an exception
-
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
-        """
+    def get_file_object(self, filename: str, bucket_name: str) -> object:
         logging.info("Entered the get_file_object method of S3Operations class")
 
         try:
             bucket = self.get_bucket(bucket_name)
-
             file_objects = [file_object for file_object in bucket.objects.filter(Prefix=filename)]
 
-            func = lambda x: x[0] if len(x) == 1 else x
+            if not file_objects:
+                raise FileNotFoundError(f"No files found in bucket {bucket_name} with prefix {filename}")
 
-            file_objs = func(file_objects)
+            # Always return the first object
+            file_obj = file_objects[0]  
+
             logging.info("Exited the get_file_object method of S3Operations class")
-
-            return file_objs
+            return file_obj
 
         except Exception as e:
             raise USvisaException(e, sys) from e
