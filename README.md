@@ -103,12 +103,6 @@ LoanPulse is a robust, end-to-end machine learning pipeline that automates the l
 ## Conclusion
 LoanPulse is a scalable and automated solution for loan approval predictions. With its robust MLOps pipeline, cloud integration, and CI/CD setup, it ensures a seamless ML lifecycle from development to deployment.
 
----
-
-## Contributors
-- [Your Name]
-- [Project Team]
-
 ## License
 This project is licensed under [MIT License].
 
